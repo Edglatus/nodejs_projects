@@ -13,34 +13,36 @@ server.get('/client', function(request, response)
 
 server.get('/client/:name', function(request, response)
 {
-    response.send(persons.find(function(p){
+    let person = persons.find(function(p){
         if(p.name == request.params.name)
             return p
-    }));
+    })
+
+    if (person != null)
+        response.send(person)
+    else
+        response.send('Person not found.')
 })
 
 server.post('/client', function(request, response){
-    request.body.forEach(function(p){
-        persons.push(p)
-    })
+    request.body.forEach((p) => persons.push(p))
 
     response.send('Person added successfully.')
 })
 
 server.put('/client/:name', function(request, response){
-    let removed = persons.find(function(p){
+    let updated = persons.find(function(p){
         if(p.name == request.params.name)
             return p
     })
 
-    if (removed != null)
+    if (updated != null)
     {
-        persons[persons.indexOf(removed)] = request.body
+        persons[persons.indexOf(updated)] = Array.isArray(request.body) ? request.body[0] : request.body
         response.send('Person updated successfully.')
     }
-    else {
+    else
         response.send('Person not found.')
-    }
 })
 
 server.delete('/client/:name', function(request, response){
@@ -54,9 +56,8 @@ server.delete('/client/:name', function(request, response){
         persons.splice(persons.indexOf(removed), 1)
         response.send('Person removed successfully.')
     }
-    else {
+    else
         response.send('Person not found.')
-    }
 })
 
 server.listen(8080, function(){

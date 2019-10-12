@@ -3,23 +3,23 @@ const server = express();
 
 var counter = 0
 
-server.get('/contador', function(req, res){
-    res.send("Contador: " + counter)
+server.get('/counter', function(req, res){
+    res.send("Counter: " + counter)
 })
 
-server.post('/contador', function(req, res){
+server.post('/counter', function(req, res){
     counter++
-    res.send("Contador Incrementado.")
+    res.send("Counter Increased.")
 })
 
-server.put('/contador', function(req, res){
+server.put('/counter', function(req, res){
     counter = 0
-    res.send("Contador Zerado.")
+    res.send("Counter Reset.")
 })
 
-server.delete('/contador', function(req, res){
+server.delete('/counter', function(req, res){
     counter--
-    res.send("Contador Decrementado.")
+    res.send("Counter Decreased.")
 })
 
 server.listen(8080, function()
