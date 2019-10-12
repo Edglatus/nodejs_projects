@@ -1,5 +1,3 @@
-const Person = require('./person.js')
-const bodyParser = require('body-parser')
 const express = require('express')
 const server = express();
 
