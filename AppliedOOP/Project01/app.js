@@ -11,8 +11,10 @@ const hb = require('express-handlebars')
 	server.set('view engine', 'handlebars')
 
 const guest = require('./routes/guests')
+const party = require('./routes/parties')
 
 server.use('/guest', guest)
+server.use('/party', party)
 
 const port = 8080
 server.listen(port, () => {console.log('Listening on port '+port)})

@@ -4,12 +4,12 @@
 	</div>
 
 	<div class="panel-body">
-		<form class="form-inline" method="POST">
+		<form class="form-inline" method="POST" action="/guest">
 			<div class="form-group">
 				<input type="hidden" name="id">
-				<input type="text" name="formName" class="form-control" placeholder="Nome">
-				<input type="text" name="formExtras" class="form-control" placeholder="Acompanhantes">
-				<button type="submit" name="submit" class="btn btn-primary">Enviar</button>
+				<input type="text" name="formName" class="form-control" placeholder="Name">
+				<input type="text" name="formExtras" class="form-control" placeholder="Extras">
+				<button type="submit" name="submit" class="btn btn-primary">Post</button>
 			</div>
 		</form>
 		<table class="table">
@@ -24,7 +24,7 @@
 				<tr>
 					<td>{{name}}</td>
 					<td>{{extras}}</td>
-					<td><form method="DELETE" action="/guest/{{{id}}}"><button type="submit">Delete</button></td>
+					<td><form method="DELETE" action="/guest/delete/{{$loki}}"><button type="submit">Delete</button></form></td>
 				</tr>
 				{{/each}}
 			</tbody>

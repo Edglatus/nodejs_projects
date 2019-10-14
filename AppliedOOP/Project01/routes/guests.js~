@@ -8,7 +8,6 @@ const Guests = db.Guests
 
 //Routes
 	router.get('/', (request, response) => {
-		console.log(Guests.find())
 		response.render('guestPage', {guest: Guests.find()})
 	})
 	router.post('/', (request, response) => {
@@ -18,9 +17,17 @@ const Guests = db.Guests
 		})
 		response.redirect('/guest')
 	})
+	router.put('/:id', (request, response) => {
+		let updated = Guests.find({id: request.params.id})
 
-	router.get('/delete/:id', (request, response) => {
-		Guests.chain().find({$loki : {'$aeq': request.params.id}}).remove()
+		updated.name = request.body.formName
+		updated.extras = request.body.formExtras
+		Guests.update(updated)
+
+		response.redirect('/guest')
+	})
+	router.delete('/:id', (request, response) => {
+		Guests.chain().find({id: request.params.id}).remove()
 
 		response.redirect('/guest')
 	})

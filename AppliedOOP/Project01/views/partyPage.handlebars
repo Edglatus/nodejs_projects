@@ -1,8 +1,33 @@
-<form class="form-inline" method="POST">
-	<div class="form-group">
-		<input type="hidden" name="id" th:field="*{id}">
-		<input type="text" name="nome" class="form-control" placeholder="Nome">
-		<input type="date" name="fdate" class="form-control" placeholder="Data">
-		<button type="submit" name="submit" class="btn btn-primary">Enviar</button>
+<div class="panel panel-default" style="margin: 10px">
+	<div class="panel-heading">
+		<h1 class="panel-title">Guestlist</h1>
 	</div>
-</form>
+
+	<div class="panel-body">
+		<form class="form-inline" method="POST" action="/party">
+			<div class="form-group">
+				<input type="hidden" name="id">
+				<input type="text" name="formName" class="form-control" placeholder="Name">
+				<input type="date" name="formDate" class="form-control" placeholder="Date">
+				<button type="submit" name="submit" class="btn btn-primary">Post</button>
+			</div>
+		</form>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Extras</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each party}}
+				<tr>
+					<td>{{name}}</td>
+					<td>{{date}}</td>
+					<td><form method="DELETE" action="/party/delete/{{$loki}}"><button type="submit">Delete</button></form></td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</div>

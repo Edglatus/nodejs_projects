@@ -2,27 +2,27 @@ const express = require('express')
 const router = express.Router()
 
 const db = require('../collections/collections')
-const Guests = db.Guests
+const Parties = db.Parties
 
 //Configuration
 
 //Routes
 	router.get('/', (request, response) => {
-		console.log(Guests.find())
-		response.render('guestPage', {guest: Guests.find()})
+		console.log(Parties.find())
+		response.render('partyPage', {party: Parties.find()})
 	})
 	router.post('/', (request, response) => {
-		Guests.insert({
+		Parties.insert({
 			name: request.body.formName,
-			extras: request.body.formExtras
+			extras: request.body.formDate
 		})
-		response.redirect('/guest')
+		response.redirect('/party')
 	})
 
 	router.get('/delete/:id', (request, response) => {
-		Guests.chain().find({$loki : {'$aeq': request.params.id}}).remove()
+		Parties.chain().find({$loki : {'$aeq': request.params.id}}).remove()
 
-		response.redirect('/guest')
+		response.redirect('/party')
 	})
 
 module.exports = router;
