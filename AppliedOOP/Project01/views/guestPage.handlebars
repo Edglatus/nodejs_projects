@@ -1,0 +1,33 @@
+<div class="panel panel-default" style="margin: 10px">
+	<div class="panel-heading">
+		<h1 class="panel-title">Guestlist</h1>
+	</div>
+
+	<div class="panel-body">
+		<form class="form-inline" method="POST">
+			<div class="form-group">
+				<input type="hidden" name="id">
+				<input type="text" name="formName" class="form-control" placeholder="Nome">
+				<input type="text" name="formExtras" class="form-control" placeholder="Acompanhantes">
+				<button type="submit" name="submit" class="btn btn-primary">Enviar</button>
+			</div>
+		</form>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Extras</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each guest}}
+				<tr>
+					<td>{{name}}</td>
+					<td>{{extras}}</td>
+					<td><form method="DELETE" action="/guest/{{{id}}}"><button type="submit">Delete</button></td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</div>
