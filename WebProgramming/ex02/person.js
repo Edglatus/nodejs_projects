@@ -1,4 +1,5 @@
-class Person {
+class Person
+{
     constructor(name, rg, cpf, sex, tel, cel, email)
     {
         this._name = name

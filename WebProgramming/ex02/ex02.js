@@ -1,11 +1,13 @@
 const express = require('express')
 const server = express();
 
-server.use(express.json())
-server.use(express.urlencoded({ extended: true }))
+//Configuration
+    server.use(express.json())
+    server.use(express.urlencoded({ extended: true }))
 
 var persons = []
 
+//Routes
 server.get('/client', function(request, response)
 {
     response.send(persons);
@@ -24,13 +26,15 @@ server.get('/client/:name', function(request, response)
         response.send('Person not found.')
 })
 
-server.post('/client', function(request, response){
+server.post('/client', function(request, response)
+{
     request.body.forEach((p) => persons.push(p))
 
     response.send('Person added successfully.')
 })
 
-server.put('/client/:name', function(request, response){
+server.put('/client/:name', function(request, response)
+{
     let updated = persons.find(function(p){
         if(p.name == request.params.name)
             return p
@@ -45,7 +49,8 @@ server.put('/client/:name', function(request, response){
         response.send('Person not found.')
 })
 
-server.delete('/client/:name', function(request, response){
+server.delete('/client/:name', function(request, response)
+{
     let removed = persons.find(function(p){
         if(p.name == request.params.name)
             return p
@@ -60,6 +65,8 @@ server.delete('/client/:name', function(request, response){
         response.send('Person not found.')
 })
 
-server.listen(8080, function(){
-    console.log("Listening on port 8080...")
+const port = 8080
+app.listen(port, function()
+{
+    console.log('Listening on port ' + port)
 })
