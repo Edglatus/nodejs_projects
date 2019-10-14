@@ -2,57 +2,26 @@ const express = require('express')
 const router = express.Router();
 
 const db = require('../models/index')
-    const Address = db.Address
+const Address = db.Address
 
-    //Configuration
-        router.use(express.json())
-        router.use(express.urlencoded({ extended: true }))
+const op = require('./operations')
+
+//Configuration
+    router.use(express.json())
+    router.use(express.urlencoded({ extended: true }))
 
 //Routes
     //Create
-    router.post('/', function(request, response)
-    {
-        Array.isArray(request.body) ? request.body.forEach((p) => Address.create(p)) : Address.create(request.body)
-        response.send('Address added successfully.')
-    })
+    router.post('/', (request, response) => {op.post(request, response, Address, "Address")})
 
     //Read
-    router.get('/', function(request, response)
-    {
-        Address.findAll().then((addresss)=>{
-            response.send(addresss);
-        })
-    })
-    router.get('/:id', function(request, response)
-    {
-        Address.findByPk(request.params.id).then((address)=>{
-            if (address != null)
-                response.send(address)
-            else
-                response.send('Address not found.')
-        })
-    })
+    router.get('/', (request, response) => { op.get_all(response, Address) } )
+    router.get('/:id', (request, response) => { op.get_one(request, response, Address, "Address") } )
 
     //Update
-    router.put('/:id', function(request, response){
-        let updated = Array.isArray(request.body) ? request.body[0] : request.body
-
-        Address.update(updated, {where: {id: request.params.id}}).then((n)=>{
-            if (n[0] > 0)
-                response.send('Address updated successfully.')
-            else
-                response.send('Address not found.')
-        })
-    })
+    router.put('/:id', (request, response) => { op.put(request, response, Address, "Address") } )
 
     //Delete
-    router.delete('/:id', function(request, response){
-        Address.destroy({where: {id: request.params.id}}).then((n)=>{
-            if (n > 0)
-                response.send('Address removed successfully.')
-            else
-                response.send('Address not found.')
-        })
-    })
+    router.delete('/:id', (request, response) => { op.del(request, response, Address, "Address") } )
 
 module.exports = router
