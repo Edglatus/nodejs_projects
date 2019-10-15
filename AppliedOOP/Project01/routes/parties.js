@@ -7,18 +7,38 @@ const Parties = db.Parties
 //Configuration
 
 //Routes
-	router.get('/', (request, response) => {
-		console.log(Parties.find())
-		response.render('partyPage', {party: Parties.find()})
-	})
+	//Create
 	router.post('/', (request, response) => {
 		Parties.insert({
 			name: request.body.formName,
-			extras: request.body.formDate
+			date: request.body.formDate
 		})
 		response.redirect('/party')
 	})
 
+	//Read
+	router.get('/', (request, response) => {
+		response.render('partyPage', {party: Parties.find()})
+	})
+
+	//Update
+	router.get('/update/:id', (request, response) => {
+		let updated = Parties.findObject({$loki : {'$aeq': request.params.id}})
+
+		response.render('partyPage', {party: Parties.find(), nameDefault: updated.name, dateDefault: updated.date})
+	})
+	router.post('/update/:id', (request, response) => {
+		let updated = Parties.findObject({$loki : {'$aeq': request.params.id}})
+
+		updated.name = request.body.formName
+		updated.date = request.body.formDate
+
+		Parties.update(updated)
+
+		response.redirect('/party')
+	})
+
+	//Delete
 	router.get('/delete/:id', (request, response) => {
 		Parties.chain().find({$loki : {'$aeq': request.params.id}}).remove()
 
