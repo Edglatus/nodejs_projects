@@ -1,9 +1,9 @@
-<div class="panel panel-default" style="margin: 10px">
-	<div class="panel-heading">
-		<h1 class="panel-title">Party List</h1>
+<div class="card" style="margin: 10px">
+	<div class="card-header">
+		<h1 class="card-title">Party List</h1>
 	</div>
 
-	<div class="panel-body">
+	<div class="card-body">
 		<form class="form-inline" method="POST" style="margin: 20px 0">
 			<div class="form-group">
 				<input type="text" name="formName" class="form-control" placeholder="Name" value="{{nameDefault}}">
@@ -24,8 +24,8 @@
 				<tr>
 					<td>{{name}}</td>
 					<td>{{date}}</td>
-					<td><a class="glyphicon glyphicon-trash" href="/party/delete/{{$loki}}">Delete</a></td>
-					<td><a class="glyphicon glyphicon-pencil" href="/party/update/{{$loki}}">Update</a></td>
+					<td><a href="/party/delete/{{$loki}}">Delete</a></td>
+					<td><a href="/party/update/{{$loki}}">Update</a></td>
 				</tr>
 				{{/each}}
 			</tbody>

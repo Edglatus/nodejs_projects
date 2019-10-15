@@ -1,9 +1,9 @@
-<div class="panel panel-default" style="margin: 10px">
-	<div class="panel-heading">
-		<h1 class="panel-title">Guestlist</h1>
+<div class="card" style="margin: 10px">
+	<div class="card-header">
+		<h1 class="card-title">Guestlist</h1>
 	</div>
 
-	<div class="panel-body">
+	<div class="card-body">
 		<form class="form-inline" method="POST" style="margin: 20px 0">
 			<div class="form-group">
 				<input type="text" name="formName" class="form-control" placeholder="Name" value="{{nameDefault}}">
@@ -24,8 +24,8 @@
 				<tr>
 					<td>{{name}}</td>
 					<td>{{extras}}</td>
-					<td><a class="glyphicon glyphicon-trash" href="/guest/delete/{{$loki}}">Delete</a></td>
-					<td><a class="glyphicon glyphicon-pencil" href="/guest/update/{{$loki}}">Update</a></td>
+					<td><a href="/guest/delete/{{$loki}}">Delete</a></td>
+					<td><a href="/guest/update/{{$loki}}">Update</a></td>
 				</tr>
 				{{/each}}
 			</tbody>
