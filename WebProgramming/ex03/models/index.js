@@ -3,7 +3,7 @@ const EmployeeModel = require('./employee')
 const AddressModel = require('./address')
 
 //Sequelize Connection
-    const sequelize = new Sequelize('ex3', 'webUser', '', {
+    const sequelize = new Sequelize('ex3', '', '', {
       host: 'localhost',
       dialect: 'mysql'
     })
